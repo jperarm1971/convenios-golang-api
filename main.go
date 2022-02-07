@@ -12,9 +12,9 @@ import (
 )
 
 const (
-	DB_USER     = "admin"
-	DB_PASSWORD = "root"
-	DB_NAME     = "database"
+	DB_USER     = "postgres"
+	DB_PASSWORD = "admin"
+	DB_NAME     = "josue"
 )
 
 type Book struct {
@@ -50,7 +50,7 @@ func main() {
 func GetBooks(w http.ResponseWriter, r *http.Request) {
 	db := setupDB()
 
-	printMessage("Getting books...")
+	printMessage("obteniendo libros...")
 
 	// Get all books from books table that don't have bookID = "1"
 	rows, err := db.Query("SELECT * FROM books where bookID <> $1", "1")
