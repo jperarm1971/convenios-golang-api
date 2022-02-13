@@ -47,34 +47,6 @@ func main() {
 }
 
 // Get all books
-func GetBooks(w http.ResponseWriter, r *http.Request) {
-	db := setupDB()
-
-	printMessage("obteniendo libros...")
-
-	// Get all books from books table that don't have bookID = "1"
-	rows, err := db.Query("SELECT * FROM books where bookID <> $1", "1")
-
-	checkErr(err)
-	var books []Book
-	// var response []JsonResponse
-	// Foreach book
-	for rows.Next() {
-		var id int
-		var bookID string
-		var bookName string
-
-		err = rows.Scan(&id, &bookID, &bookName)
-
-		checkErr(err)
-
-		books = append(books, Book{BookID: bookID, BookName: bookName})
-	}
-
-	var response = JsonResponse{Type: "success", Data: books}
-
-	json.NewEncoder(w).Encode(response)
-}
 
 // Create a book
 func CreateBook(w http.ResponseWriter, r *http.Request) {
@@ -145,8 +117,17 @@ func DeleteBooks(w http.ResponseWriter, r *http.Request) {
 
 // DB set up
 func setupDB() *sql.DB {
-	dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", DB_USER, DB_PASSWORD, DB_NAME)
-	db, err := sql.Open("postgres", dbinfo)
+
+	host := "192.168.1.39"
+	port := "5432"
+	user := "postgres"
+	password := "admin"
+	dbname := "josue"
+
+	psqlInfo := fmt.Sprintf("host=%s port=%s user=%s password=%s dbname=%s sslmode=disable", host, port, user, password, dbname)
+
+	//dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", DB_USER, DB_PASSWORD, DB_NAME)
+	db, err := sql.Open("postgres", psqlInfo)
 
 	checkErr(err)
 
