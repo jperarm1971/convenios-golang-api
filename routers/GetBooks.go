@@ -2,14 +2,17 @@ package routers
 
 import (
 	"encoding/json"
+	"fmt"
 
 	"net/http"
 
 	_ "github.com/lib/pq"
+
+	"github.com/jperarm1971/convenios-golang-api/BBDD"
 )
 
 func GetBooks(w http.ResponseWriter, r *http.Request) {
-	db := SetUpDB()
+	db := BBDD.SetUpDB()
 
 	printMessage("obteniendo libros...")
 
@@ -35,4 +38,17 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 	var response = JsonResponse{Type: "success", Data: books}
 
 	json.NewEncoder(w).Encode(response)
+}
+
+func printMessage(message string) {
+	fmt.Println("")
+	fmt.Println(message)
+	fmt.Println("")
+}
+
+// Function for handling errors
+func checkErr(err error) {
+	if err != nil {
+		panic(err)
+	}
 }
