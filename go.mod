@@ -1,4 +1,4 @@
-module github.com/karolispx/golang-postgresql-rest-api
+module github.com/jperarm/golang-postgresql-rest-api
 
 go 1.17
 
