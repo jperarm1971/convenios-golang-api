@@ -4,6 +4,7 @@ import (
 	"database/sql"
 	"fmt"
 
+	utils "github.com/jperarm1971/convenios-golang-api/Utils"
 	_ "github.com/lib/pq"
 )
 
@@ -26,14 +27,7 @@ func SetUpDB() *sql.DB {
 	//dbinfo := fmt.Sprintf("user=%s password=%s dbname=%s sslmode=disable", DB_USER, DB_PASSWORD, DB_NAME)
 	db, err := sql.Open("postgres", psqlInfo)
 
-	checkErr(err)
+	utils.CheckErr(err)
 
 	return db
-}
-
-// Function for handling errors
-func checkErr(err error) {
-	if err != nil {
-		panic(err)
-	}
 }
