@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"github.com/jperarm1971/convenios-golang-api/routers"
 	_ "github.com/lib/pq"
 )
 
@@ -32,7 +33,7 @@ func main() {
 	router := mux.NewRouter()
 
 	// Get all books
-	router.HandleFunc("/books/", GetBooks).Methods("GET")
+	router.HandleFunc("/books/", routers.GetBooks).Methods("GET")
 
 	// Create a book
 	router.HandleFunc("/books/", CreateBook).Methods("POST")

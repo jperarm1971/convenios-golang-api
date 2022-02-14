@@ -8,12 +8,12 @@ import (
 
 	_ "github.com/lib/pq"
 
-	"github.com/jperarm1971/convenios-golang-api/BBDD"
-	"github.com/jperarm1971/convenios-golang-api/Models"
+	bbdd "github.com/jperarm1971/convenios-golang-api/BBDD"
+	Model "github.com/jperarm1971/convenios-golang-api/Models"
 )
 
 func GetBooks(w http.ResponseWriter, r *http.Request) {
-	db := BBDD.SetUpDB()
+	db := bbdd.SetUpDB()
 
 	printMessage("obteniendo libros...")
 
@@ -21,7 +21,7 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 	rows, err := db.Query("SELECT * FROM books where bookID <> $1", "1")
 
 	checkErr(err)
-	var books []Models.Book
+	var books []Model.Book
 	// var response []JsonResponse
 	// Foreach book
 	for rows.Next() {
@@ -33,10 +33,10 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 
 		checkErr(err)
 
-		books = append(books, Models.Book{BookID: bookID, BookName: bookName})
+		books = append(books, Model.Book{BookID: bookID, BookName: bookName})
 	}
 
-	var response = Models.JsonResponse{Type: "success", Data: books}
+	var response = Model.JsonResponse{Type: "success", Data: books}
 
 	json.NewEncoder(w).Encode(response)
 }
