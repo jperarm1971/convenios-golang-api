@@ -16,7 +16,7 @@ const (
 
 func SetUpDB() *sql.DB {
 
-	host := "192.168.1.39"
+	host := "localhost"
 	port := "5432"
 	user := "postgres"
 	password := "admin"

@@ -15,6 +15,14 @@ func main() {
 	// Get all books
 	router.HandleFunc("/books/", routers.GetBooks).Methods("GET")
 
+	router.HandleFunc("/convenios", routers.GetConvenios).Methods("GET")
+
+	router.HandleFunc("/altaconvenio", routers.CreaConvenio).Methods("POST")
+
+	router.HandleFunc("/modificaconvenio", routers.ActualizaConvenio).Methods("POST")
+
+	router.HandleFunc("/convenio", routers.GetConvenio).Methods("GET")
+
 	// Create a book
 	router.HandleFunc("/books/", routers.CreateBook).Methods("POST")
 
